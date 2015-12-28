@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Strength Balance Calculator</title>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="lib/jquery/dist/jquery.min.js"></script>
 
     <style>
-        thead
-        {
+        thead {
             font-weight: bold;
         }
     </style>
@@ -45,20 +44,18 @@
             "slrdl": .13
         }
 
-
-        function getDeadliftWeight(lift, numericalWeight)
+        $(function ()
         {
-            dlWeight = deadliftRatioTo[lift] * numericalWeight;
-        }
+            $("input").on("input", function ()
+            {
+                var target = $('#' + event.target.id);
+                selectedLift = target.attr('id');
+                var numericalWeight = parseFloat(target.val());
+                dlWeight = deadliftRatioTo[selectedLift] * numericalWeight;
+                fillFields();
+            });
+        });
 
-        function calculateWeights(lift, weight)
-        {
-            selectedLift = lift;
-            var numericalWeight = parseFloat(weight);
-            getDeadliftWeight(lift, numericalWeight);
-
-            fillFields();
-        }
 
         function fillFields()
         {
@@ -87,81 +84,81 @@
 
 </head>
 <body>
-<table>
-    <thead>
-    <td>Lift:</td>
-    <td>Weight:</td>
-    </thead>
-    <tbody>
-    <div id="wrapper">
-        <tr>
-            <td>Deadlift</td>
-            <td><input type="number" oninput="calculateWeights(this.id, this.value)" class="input" id="dl"/></td>
-        </tr>
-        <tr>
-            <td>Back squat:</td>
-            <td><input type="number" oninput="calculateWeights(this.id, this.value)" class="input" id="bs"/></td>
-        </tr>
-        <tr>
-            <td> Bench press and pull-up</td>
-            <td><input type="number" oninput="calculateWeights(this.id, this.value)" class="input" id="bp"/></td>
-        </tr>
-        <tr>
-            <td> Front squat and close-grip bench press</td>
-            <td><input type="number" oninput="calculateWeights(this.id, this.value)" class="input" id="fs"/></td>
-        </tr>
-        <tr>
-            <td>Dumbbell curl, barbell curl, and dumbbell overhead triceps extension</td>
+    <table>
+        <thead>
+        <td>Lift:</td>
+        <td>Weight:</td>
+        </thead>
+        <tbody>
+            <div id="wrapper">
+                <tr>
+                    <td>Deadlift</td>
+                    <td><input type="number" class="input" id="dl" /></td>
+                </tr>
+                <tr>
+                    <td>Back squat:</td>
+                    <td><input type="number" class="input" id="bs" /></td>
+                </tr>
+                <tr>
+                    <td> Bench press and pull-up</td>
+                    <td><input type="number" class="input" id="bp" /></td>
+                </tr>
+                <tr>
+                    <td> Front squat and close-grip bench press</td>
+                    <td><input type="number" class="input" id="fs" /></td>
+                </tr>
+                <tr>
+                    <td>Dumbbell curl, barbell curl, and dumbbell overhead triceps extension</td>
 
-            <td><input type="number" oninput="calculateWeights(this.id, this.value)" class="input" id="dbc"/></td>
-        </tr>
-    </div>
-    <tr>
-        <td> Hang clean</td>
-        <td><label id="hangClean"></label></td>
-    </tr>
-    <tr>
-        <td> Dumbbell bench press and one-arm row</td>
-        <td><label id="dbbench"></label></td>
-    </tr>
-    <tr>
-        <td> Push press, jerk, and dumbbell incline bench press</td>
-        <td><label id="ppress"></label></td>
-    </tr>
-    <tr>
-        <td> Dumbbell overhead press</td>
-        <td><label id="dbohp"></label></td>
-    </tr>
-    <tr>
-        <td> Hammer curl</td>
-        <td><label id="hammerCurl"></label></td>
-    </tr>
-    <tr>
-        <td>Dumbbell skull crusher, preacher curl, and concentration curl (two dumbbell total)</td>
-        <td><label id="dbSkullCrush"></label></td>
-    </tr>
-    <tr>
-        <td> Bulgarian squat (weighted)</td>
-        <td><label id="bulgarianSq"></label></td>
-    </tr>
-    <tr>
-        <td> Lunge, split squat, and press-down</td>
-        <td><label id="lunge"></label></td>
-    </tr>
-    <tr>
-        <td> E-Z bar skull crusher</td>
-        <td><label id="ezbSC"></label></td>
-    </tr>
+                    <td><input type="number" class="input" id="dbc" /></td>
+                </tr>
+            </div>
+            <tr>
+                <td> Hang clean</td>
+                <td><label id="hangClean"></label></td>
+            </tr>
+            <tr>
+                <td> Dumbbell bench press and one-arm row</td>
+                <td><label id="dbbench"></label></td>
+            </tr>
+            <tr>
+                <td> Push press, jerk, and dumbbell incline bench press</td>
+                <td><label id="ppress"></label></td>
+            </tr>
+            <tr>
+                <td> Dumbbell overhead press</td>
+                <td><label id="dbohp"></label></td>
+            </tr>
+            <tr>
+                <td> Hammer curl</td>
+                <td><label id="hammerCurl"></label></td>
+            </tr>
+            <tr>
+                <td>Dumbbell skull crusher, preacher curl, and concentration curl (two dumbbell total)</td>
+                <td><label id="dbSkullCrush"></label></td>
+            </tr>
+            <tr>
+                <td> Bulgarian squat (weighted)</td>
+                <td><label id="bulgarianSq"></label></td>
+            </tr>
+            <tr>
+                <td> Lunge, split squat, and press-down</td>
+                <td><label id="lunge"></label></td>
+            </tr>
+            <tr>
+                <td> E-Z bar skull crusher</td>
+                <td><label id="ezbSC"></label></td>
+            </tr>
 
-    <tr>
-        <td> Seated calf raise and pec fly: (two dumbbell total)</td>
-        <td><label id="calfRaise"></label></td>
-    </tr>
-    <tr>
-        <td> Single-leg Romanian deadlift and standing calf raise: (one dumbbell)</td>
-        <td><label id="slrdl"></label></td>
-    </tr>
-    </tbody>
-</table>
+            <tr>
+                <td> Seated calf raise and pec fly: (two dumbbell total)</td>
+                <td><label id="calfRaise"></label></td>
+            </tr>
+            <tr>
+                <td> Single-leg Romanian deadlift and standing calf raise: (one dumbbell)</td>
+                <td><label id="slrdl"></label></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
